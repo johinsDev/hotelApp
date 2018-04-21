@@ -1,0 +1,9 @@
+{
+  "name": "hotelApp",
+  "version": "0.1.0",
+  "description": "Simple Hotel app for almundo",
+  "main": "index.js",
+  "repository": "git@github.com:johinsDev/hotelApp.git",
+  "author": "johinsdev",
+  "license": "MIT"
+}
