@@ -21,7 +21,7 @@ export default function logErrorService(err, req, res, next) {
       true,
     );
   }
-  console.log(process.env.NODE_ENV);
+
   if (isProd) {
     const raven = new Raven.Client(constants.RAVEN_ID);
     raven.captureException(err);

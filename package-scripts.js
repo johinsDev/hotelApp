@@ -27,10 +27,6 @@ module.exports = {
         script: series('nps doc', `surge ./doc -d ${process.env.DOCS_WEBSITE}`),
       },
     },
-    deploy: {
-      description: 'Deploy the docs on surge.',
-      script: series('nps doc', `surge ./doc -d ${process.env.DOCS_WEBSITE}`),
-    },
     dev: {
       start: {
         description: 'Running on dev environment.',
@@ -40,24 +36,44 @@ module.exports = {
         script: concurrent.nps('dev.watch', 'dev.start'),
       },
       watch: {
-        jdescription: 'Webpack watch for change and compile.',
+        description: 'Webpack watch for change and compile.',
         script: 'webpack -w',
       },
       withDebug: {
         script: `${crossEnv('NODE_ENV=development')} MONGOOSE_DEBUG=true DEBUG=express:* nodemon dist/index.bundle.js`,
       },
-      jdebug: {
+      debug: {
         description: 'Running on dev environment with debug on.',
         script: concurrent.nps('dev.watch', 'dev.withDebug'),
       },
     },
     lint: {
-      default: 'eslint src', 
+      default: 'eslint src',
       fix: 'eslint --fix src',
     },
-     validate: {
-      description: 'Validate code by linting, type-checking.',
-      default: series.nps('lint'),
+    lintStaged: 'lint-staged',
+    db: {
+      seedsUser: 'bash ./scripts/seeds/user.seed.sh',
+      seedsClearUser: 'bash ./scripts/seeds/clearUser.seed.sh',
+      seedsClear: 'bash ./scripts/seeds/clearAll.seed.sh',
     },
-  }
+    test: {
+      default: `${crossEnv('NODE_ENV=test')} mocha $(find __tests__ -name *.test.js) --colors --require babel-core/register`,
+      watch: series.nps('test -w'),
+      cover: `${crossEnv('NODE_ENV=test')} istanbul cover _mocha $(find __tests__ -name *.test.js) --require babel-core/register --colors --bail --recursive '__tests__/**/*.test.js'`,
+      checkCover: series('nps test.cover', 'istanbul check-coverage'),
+    },
+    cover: {
+      description: 'Open the coverage on browser.',
+      default: 'open coverage/lcov-report/*.html',
+    },
+    reportCoverage: {
+      description: 'Send report to coveralls.',
+      default: 'coveralls < ./coverage/lcov.info',
+    },
+    validate: {
+      description: 'Validate code by linting, type-checking.',
+      default: series.nps('lint', 'test'),
+    },
+  },
 };

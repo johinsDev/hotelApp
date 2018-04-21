@@ -1,4 +1,3 @@
-import APIError from '../../services/error';
 import HTTPStatus from 'http-status';
 
 // CONTROLLER FUNCTIONS

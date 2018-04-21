@@ -5,7 +5,7 @@ module.exports = {
   target: 'node',
   externals: [nodeExternals()],
   entry: {
-    'index': './index.js',
+    'index': './src/index.js',
   },
   output: {
     path: path.join(__dirname, 'dist'),
