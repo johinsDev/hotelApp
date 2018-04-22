@@ -46,5 +46,6 @@ module.exports = {
         description: 'Running on dev environment with debug on.',
         script: concurrent.nps('dev.watch', 'dev.withDebug'),
       },
-    },
+    }
+  }
 };
