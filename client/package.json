@@ -1,5 +1,5 @@
 {
-  "name": "client hotel-app",
+  "name": "hotel-app",
   "version": "1.0.0",
   "description": "Hotel app for almundo with react and redux",
   "scripts": {
