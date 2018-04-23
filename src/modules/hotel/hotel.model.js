@@ -71,7 +71,7 @@ HotelSchema.pre('validate', function(next) {
   next();
 });
 
-HotelSchema.query.list = function({ sort = { createdAt: '-1' }, limit = 10, page = 1 } = {}) {
+HotelSchema.query.list = function({ sort = { createdAt: '-1' }, limit = 100, page = 1 } = {}) {
   return this.model.list({conditions: this._conditions, sort, limit, page });
 }
 
@@ -80,7 +80,7 @@ HotelSchema.statics = {
     const hotel = this.massAsignamentParams(params);
     return hotel.save();
   },
-  list({ conditions = {}, sort = { createdAt: '-1' }, limit = 5, page = 1 } = {}) {
+  list({ conditions = {}, sort = { createdAt: '-1' }, limit = 100, page = 1 } = {}) {
     return this.find(conditions)
       .sort(sort)
       .skip((page - 1) * limit)

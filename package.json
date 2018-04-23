@@ -10,6 +10,8 @@
     "build": "nps build",
     "start": "nps",
     "dev": "nps dev",
+    "db:seeds-hotels": "nps db.seedsHotels",
+    "db:seeds-clear": "nps db.seedsClearUser",
     "dev:debug": "nps dev.debug",
     "prettier": "prettier --single-quote --print-width 80 --trailing-comma all --write '{src,__{tests,mocks}__}/**/*.js'",
     "precommit": "nps lintStaged && nps validate",

@@ -46,6 +46,10 @@ module.exports = {
         description: 'Running on dev environment with debug on.',
         script: concurrent.nps('dev.watch', 'dev.withDebug'),
       },
-    }
+    },
+    db: {
+      seedsHotels: 'bash ./scripts/hotels.seed.sh',
+      seedsClear: 'bash ./scripts/clearAll.seed.sh',
+    },
   }
 };
