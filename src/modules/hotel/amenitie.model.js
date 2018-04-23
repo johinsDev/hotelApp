@@ -3,7 +3,7 @@
 import mongoose, { Schema } from 'mongoose';
 
 function getImage(image) {
-  return `${this.name}_url`;
+  return 'https://cdn1.iconfinder.com/data/icons/hotel-restaurant/512/8-512.png';
 }
 
 const AmenitieSchema = new Schema({

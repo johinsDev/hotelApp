@@ -11,10 +11,6 @@ function getImageHotel(image) {
   return image;
 }
 
-function getPrice(price) {
-  return `${price} ${this.currency}`;
-}
-
 const HotelSchema = new Schema({
   name: {
     type: String,
@@ -32,7 +28,6 @@ const HotelSchema = new Schema({
   price: {
     type: Number,
     default: 1,
-    get: getPrice,
     min: [1, 'Min price hotel stars is 1']
   },
   image: {
@@ -133,6 +128,7 @@ HotelSchema.methods = {
       price: this.price,
       slug: this.slug,
       image: this.image,
+      currency: this.currency,
       amenities: this.amenities
     };
   },
