@@ -1,0 +1,10 @@
+$break-small: 320px;
+
+.home {
+  display: grid;
+  grid-template-columns: 300px 70%;
+  grid-gap: 1rem;
+  @media screen and (max-width: $break-small) {
+    grid-template-columns: 100%;
+  }
+}
