@@ -2,9 +2,6 @@
 
 import mongoose, { Schema } from 'mongoose';
 
-function getImage(image) {
-  return `${this.name}_url`;
-}
 
 const AmenitieSchema = new Schema({
   name: {
@@ -14,7 +11,6 @@ const AmenitieSchema = new Schema({
   },
   image: {
     type: String,
-    get: getImage
   }
 }, { timestamps: true });
 

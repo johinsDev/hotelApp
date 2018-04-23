@@ -18,6 +18,7 @@ middlewaresConfig(app);
 
 // Add the apiRoutes stack to the server
 app.use('/api', ApiRoutes);
+app.use(express.static('public'));
 
 // We need this to make sure we don't run a second instance
 if (!module.parent) {

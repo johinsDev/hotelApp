@@ -1,0 +1,107 @@
+$break-small: 320px;
+
+.filters {
+  margin-top: 1rem;
+  width: 100%;
+  height: auto;
+}
+
+%base {
+  background: white;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 1rem;
+  > h5 {
+    font-size: 1rem;
+    margin: 0;
+  }
+  margin-bottom: .2rem;
+  color: rgb(50, 120, 174);
+}
+
+.title {
+  @extend %base;
+  height: 30px;
+  color: black;
+  @media screen and (max-width: $break-small) {
+    justify-content: center;
+    > i {
+      padding-left: .5rem;
+    }
+  }
+}
+
+.search {
+  @extend %base;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.searchTitle {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  font-size: .9rem;
+  > div > .fa {
+    margin-right: .5rem;
+  }
+}
+
+.wrapperSearch {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin-top: 1rem;
+  > input {
+    width: 60%;
+    font-size: 1rem;
+    padding: .3rem;
+  }
+}
+
+
+.stars {
+  @extend %base;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+// stars
+.filterStars {
+  margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  > label {
+      font-size: .8rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+      > input {
+      margin-right: .5rem;
+    }
+    > .fa-star{
+      color: gold;
+    }
+  }
+  color: black;
+}
+
+.hidden {
+  display: none;
+}
+
+.hidden-xs {
+  @media screen and (max-width: $break-small) {
+    display: none;
+  }
+}
+.hidden-sm {
+  display: none; 
+  @media screen and (max-width: $break-small) {
+    display: inline;
+  }
+}

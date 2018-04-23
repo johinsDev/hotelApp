@@ -1,0 +1,87 @@
+$break-small: 320px;
+
+.item {
+  display: flex;
+  padding: .5rem;
+  background: white;
+  height: 200px;
+  margin-top: 1rem;
+  > img {
+    height: 180px;
+    width: 250px;
+  }
+  @media screen and (max-width: $break-small) {
+    flex-direction: column;
+    height: auto;
+    > img {
+      width: 100%;
+    }
+  }
+}
+
+.info {
+  width: 420px;
+  padding: 0 1rem;
+  font-size: .9rem;
+  @media screen and (max-width: $break-small) {
+    width: 100%;
+    padding: 1rem 0;
+    font-size: .9rem;
+    margin-top: 1rem;
+  }
+  > .starsInfo {
+    color: gold;
+  }
+  > h5 {
+    font-size: 1rem;
+    color: rgb(50, 120, 174);
+    font-weight: bold;
+  }
+  > .amenities {
+    display: flex;
+    margin-top: .5rem;
+    > img {
+      height: 1.5rem;
+      margin-right: .5rem;
+    }
+  }
+}
+
+.wrapperPrice {
+  border-left: 1px dotted gray;
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  @media screen and (max-width: $break-small) {
+    width: 100%;
+    justify-content: flex-start;
+    height: 160px;
+    padding-top: 1rem;
+    border-top: 1px dotted gray;
+    border-left: none;
+  }
+  > h5 {
+    width: 60%;
+    font-size: .7rem;
+    font-weight: 300;
+    color: gray;
+    text-align: center;
+  }
+  > .price {
+    font-size: 1.7rem;
+    font-weight: 600;
+    color: rgb(211, 111, 30);
+    > span:first-child { 
+      font-weight: normal;
+      padding-right: .3rem;
+    }
+  }
+  > .buttonHotel {
+    width: 110px;
+    @media screen and (max-width: $break-small) {
+      width: 100%;
+    }
+  }
+}

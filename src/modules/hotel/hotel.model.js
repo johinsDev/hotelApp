@@ -11,10 +11,6 @@ function getImageHotel(image) {
   return image;
 }
 
-function getPrice(price) {
-  return `${price} ${this.currency}`;
-}
-
 const HotelSchema = new Schema({
   name: {
     type: String,
@@ -32,7 +28,6 @@ const HotelSchema = new Schema({
   price: {
     type: Number,
     default: 1,
-    get: getPrice,
     min: [1, 'Min price hotel stars is 1']
   },
   image: {
@@ -76,7 +71,7 @@ HotelSchema.pre('validate', function(next) {
   next();
 });
 
-HotelSchema.query.list = function({ sort = { createdAt: '-1' }, limit = 10, page = 1 } = {}) {
+HotelSchema.query.list = function({ sort = { createdAt: '-1' }, limit = 100, page = 1 } = {}) {
   return this.model.list({conditions: this._conditions, sort, limit, page });
 }
 
@@ -85,7 +80,7 @@ HotelSchema.statics = {
     const hotel = this.massAsignamentParams(params);
     return hotel.save();
   },
-  list({ conditions = {}, sort = { createdAt: '-1' }, limit = 5, page = 1 } = {}) {
+  list({ conditions = {}, sort = { createdAt: '-1' }, limit = 100, page = 1 } = {}) {
     return this.find(conditions)
       .sort(sort)
       .skip((page - 1) * limit)
@@ -133,6 +128,7 @@ HotelSchema.methods = {
       price: this.price,
       slug: this.slug,
       image: this.image,
+      currency: this.currency,
       amenities: this.amenities
     };
   },
