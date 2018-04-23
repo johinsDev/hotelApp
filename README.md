@@ -17,10 +17,11 @@
 1. Clone the project `git clone https://github.com/johinsdev/hotelApp`
 2. Install dependencies `yarn install` or `npm i`
 3. Create a `.env` file in the root like the `.env.example` file.
-4. yarn dev or npm run dev init server
-5. yarn db:seeds-hotels
-6. run client. [How to?](https://github.com/johinsdev/hotelApp#run-client)
-7. For dev you need to have mongodb db locally. [How to?](https://github.com/johinsdev/hotelApp#install-mongodb)
+4. yarn build
+5. yarn dev or npm run dev init server
+6. yarn db:seeds-hotels
+7. run client. [How to?](https://github.com/johinsdev/hotelApp#run-client)
+8. For dev you need to have mongodb db locally. [How to?](https://github.com/johinsdev/hotelApp#install-mongodb)
 
 ---
 
