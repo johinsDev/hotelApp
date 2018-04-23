@@ -3,6 +3,8 @@
 import mongoose, { Schema } from 'mongoose';
 import uniqueValidator from 'mongoose-unique-validator';
 import slug from 'slug';
+import uploader from '../../services/cloudinary';
+import Amenitie from './amenitie.model';
 
 function getImageHotel(image) {
   if (!image) return 'https://www.loottis.com/wp-content/uploads/2014/10/default-img.gif';
@@ -46,7 +48,11 @@ const HotelSchema = new Schema({
     trim: true,
     lowercase: true,
     unique: true,
-  }
+  },
+  amenities: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Amenitie'
+  }]
 }, { timestamps: true });
 
 const fillable = [ 'name', 'image', 'price', 'amenities', 'stars', 'currency' ];
@@ -84,10 +90,15 @@ HotelSchema.statics = {
       .sort(sort)
       .skip((page - 1) * limit)
       .limit(limit)
+      .populate('amenities')
   }
 };
 
 HotelSchema.methods = {
+  async uploadImage(path) {
+    const url = await uploader(path);
+    if (url) this.update({ image: url });
+  },
   massAsignamentParams(params) {
     const newParams = {};
     fillable.forEach(attr => {
@@ -121,7 +132,8 @@ HotelSchema.methods = {
       stars: this.stars,
       price: this.price,
       slug: this.slug,
-      image: this.image
+      image: this.image,
+      amenities: this.amenities
     };
   },
 };

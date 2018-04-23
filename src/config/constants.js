@@ -2,17 +2,26 @@ require('dotenv').config();
 
 const devConfig = {
   JWT_SECRET: process.env.JWT_SECRET_DEV,
+  CLOUDINARY_API_KEY: process.env.CLOUDINARY_API_KEY,
+  CLOUDINARY_API_SECRET: process.env.CLOUDINARY_API_SECRET,
+  CLOUDINARY_NAME: process.env.CLOUDINARY_NAME,
   MONGO_URL: process.env.MONGO_URL_DEV,
 };
 
 const testConfig = {
   JWT_SECRET: 'ewtijwebgiuweg9w98u9283982t!!u1h28h1t1h89u9h@$$',
   MONGO_URL: 'mongodb://localhost/nodejs-api-boilerplate-test',
+  CLOUDINARY_API_KEY: process.env.CLOUDINARY_API_KEY,
+  CLOUDINARY_API_SECRET: process.env.CLOUDINARY_API_SECRET,
+  CLOUDINARY_NAME: process.env.CLOUDINARY_NAME
 };
 
 const prodConfig = {
   JWT_SECRET: process.env.JWT_SECRET_PROD,
   MONGO_URL: process.env.MONGO_URL_PROD,
+  CLOUDINARY_API_KEY: process.env.CLOUDINARY_API_KEY,
+  CLOUDINARY_API_SECRET: process.env.CLOUDINARY_API_SECRET,
+  CLOUDINARY_NAME: process.env.CLOUDINARY_NAME
 };
 
 const defaultConfig = {

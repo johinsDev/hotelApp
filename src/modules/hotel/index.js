@@ -13,9 +13,17 @@ const routes = new Router();
  * CRUD
  */
 
-routes.post('/', HotelController.store);
+routes.post('/',
+  HotelMiddleware.uploadImage(),
+  HotelController.store
+);
 
 routes.get('/', HotelController.index);
+
+routes.get('/:slug',
+  HotelMiddleware.findBySlug,
+  HotelController.find
+);
 
 routes.put('/:slug',
   HotelMiddleware.findBySlug,
@@ -26,4 +34,5 @@ routes.delete('/:slug',
   HotelMiddleware.findBySlug,
   HotelController.destroy
 );
+
 export default routes;

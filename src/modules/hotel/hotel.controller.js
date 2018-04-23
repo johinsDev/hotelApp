@@ -1,5 +1,6 @@
 import HTTPStatus from 'http-status';
 import Hotel from './hotel.model'; 
+
 /**
  * @api {post} /posts Create a post
  * @apiDescription Create a post
@@ -43,9 +44,13 @@ import Hotel from './hotel.model';
  */
 export async function store(req, res, next) {
   try {
+    const hotel = await Hotel.create(req.body);
+    if (req.files) {
+      await hotel.uploadImage(req.files.image[0].path);
+    }
     return res
       .status(HTTPStatus.CREATED)
-      .json(await Hotel.create(req.body));
+      .json(hotel);
   } catch (err) {
     err.status = HTTPStatus.BAD_REQUEST;
     return next(err);
@@ -115,8 +120,9 @@ export async function store(req, res, next) {
  */
 export async function index(req, res, next) {
   try {
-    const { page, sort } = req.query;
-    res.status(HTTPStatus.OK).json(await Hotel.list({ page, sort }));
+    const { page, sort, stars, name = '' } = req.query;
+    const conditions = stars ? { stars, name: new RegExp(name, "i") } : { name: new RegExp(name, "i") };
+    res.status(HTTPStatus.OK).json(await Hotel.list({ page, sort, conditions }));
   } catch (err) {
     err.status = HTTPStatus.BAD_REQUEST;
     return next(err);
@@ -218,3 +224,59 @@ export async function destroy(req, res, next) {
     return next(err);
   }
 }
+/**
+ * @api {get} /posts/:id Get a single post
+ * @apiDescription Get a single post
+ * @apiName getPost
+ * @apiGroup Post
+ *
+ * @apiHeader {Authorization} Authorization JWT Token
+ *
+ * @apiSuccess {Number} status Status of the Request.
+ * @apiSuccess {Object} post Post created.
+ * @apiSuccess {String} post._id Post _id.
+ * @apiSuccess {String} post.title Post title.
+ * @apiSuccess {String} post.text Post text.
+ * @apiSuccess {Object} post.author Post author.
+ * @apiSuccess {String} post.author._id Author id.
+ * @apiSuccess {String} post.author.username Author username.
+ * @apiSuccess {String} post.createdAt Post created date.
+ * @apiSuccess {Boolean} favorite User have favorite post
+ *
+ * @apiParam (Login) {String} pass Only logged in users can do this.
+ *
+ * @apiHeaderExample {json} Header-Example:
+ * {
+ *  "AUTHORIZATION": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1OTBhMWI3ODAzMDI3N2NiNjQxM2JhZGUiLCJpYXQiOjE0OTM4MzQ2MTZ9.RSlMF6RRwAALZQRdfKrOZWnuHBk-mQNnRcCLJsc8zio"
+ * }
+ *
+ * @apiSuccessExample Success-Response:
+ *
+ * HTTP/1.1 200 OK
+ *
+ * {
+ *  _id: '123',
+ *  title: 'a title',
+ *  text: 'a text',
+ *  createdAt: '2017-05-03',
+ *  author: {
+ *    _id: '123312',
+ *    username: 'Jon'
+ *  },
+ *  favorite: true
+ * }
+ *
+ * @apiErrorExample {json} Post not found
+ *    HTTP/1.1 404 Not Found
+ * @apiErrorExample {json} Unauthorized
+ *    HTTP/1.1 401 Unauthorized
+ */
+export async function find(req, res, next) {
+  try {
+    return res.status(HTTPStatus.OK).json(req.hotel.toJSON());
+  } catch (err) {
+    err.status = HTTPStatus.BAD_REQUEST;
+    return next(err);
+  }
+}
+
