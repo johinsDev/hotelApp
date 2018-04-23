@@ -63,13 +63,14 @@ $break-small: 320px;
     border-left: none;
   }
   > h5 {
+    width: 60%;
     font-size: .7rem;
     font-weight: 300;
     color: gray;
     text-align: center;
   }
   > .price {
-    font-size: 2rem;
+    font-size: 1.7rem;
     font-weight: 600;
     color: rgb(211, 111, 30);
     > span:first-child { 
